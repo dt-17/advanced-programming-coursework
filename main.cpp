@@ -23,18 +23,18 @@ int main() {
     WaveSolver2D solver(c, dx, dy, dt, nx, ny, nt);
     solver.initializeSolution();
     solver.solve();
-    solver.saveSolution("/Users/danieltompkins/Documents/advanced-programming/solution.txt");
+    solver.saveSolution("/Users/danieltompkins/Documents/programming-coursework/solution.txt");
     std::cout << "Solution saved to solution.txt" << std::endl;
 
     // Create a Visualizer instance.
-    Visualizer viz("/Users/danieltompkins/Documents/advanced-programming/solution.txt", nx, ny, nt);
+    Visualizer viz("/Users/danieltompkins/Documents/programming-coursework/solution.txt", nx, ny, nt);
     if (!viz.loadSolution()) {
         std::cerr << "Error loading solution file." << std::endl;
         return -1;
     }
     
     // Save the output of the final time step solution
-    viz.saveFinalTimeStep("/Users/danieltompkins/Documents/advanced-programming/final_timestep.png");
+    viz.saveFinalTimeStep("/Users/danieltompkins/Documents/programming-coursework/final_timestep.png");
     
     // Animate the solution.
     // Assuming you want the domain to be from 0 to 10 in both x and y,
