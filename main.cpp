@@ -31,19 +31,19 @@ int main() {
     // call function to solve for given parameters
     solver.solve();
     // call function to save the full solution data - must pass a path to the name/location you wish to save it is
-    solver.saveSolution("/Users/danieltompkins/Documents/programming-coursework/solution.txt");
-    // confirmation that the solution has been saved 
+    solver.saveSolution("/Users/danieltompkins/Documents/programming-coursework/solution1.txt");
+    // confirmation that the solution has been saved
     std::cout << "Solution saved to solution.txt" << std::endl;
 
     // Create a Visualizer instance.
-    Visualiser vis("/Users/danieltompkins/Documents/programming-coursework/solution.txt", nx, ny, nt);
+    Visualiser vis("/Users/danieltompkins/Documents/programming-coursework/solution1.txt", nx, ny, nt);
     if (!vis.loadSolution()) {
         std::cerr << "Error loading solution file." << std::endl;
         return -1;
     }
     
     // Save the output of the final time step solution
-    vis.saveFinalTimeStep("/Users/danieltompkins/Documents/programming-coursework/final_timestep.png");
+    vis.saveFinalTimeStep("/Users/danieltompkins/Documents/programming-coursework/final_timestep1.png");
     
     // Animate the solution.
     // Assuming you want the domain to be from 0 to 10 in both x and y,
