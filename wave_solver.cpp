@@ -20,7 +20,7 @@ WaveSolver2D::WaveSolver2D(double c, double dx, double dy, double dt, int nx, in
 }
 
 // Initialize the solution grid with a Gaussian pulse.
-void WaveSolver2D::initializeSolution() {
+void WaveSolver2D::initialiseSolution() {
     double x0 = nx * dx / 2.0, y0 = ny * dy / 2.0; // Center of the pulse
     double sigma = 1.0;                             // Width of the pulse
     double A = 1.0;                                 // Amplitude

@@ -12,18 +12,18 @@
 #include <iostream>
 #include <string>
 
-Visualizer::Visualizer(const std::string &filename, int nx, int ny, int nt)
+Visualiser::Visualiser(const std::string &filename, int nx, int ny, int nt)
     : filename(filename), nx(nx), ny(ny), nt(nt)
 {
     // Allocate space for the solution: nt time steps of nx x ny grids.
     u.resize(nt, std::vector<std::vector<double>>(nx, std::vector<double>(ny, 0.0)));
 }
 
-Visualizer::~Visualizer() {
+Visualiser::~Visualiser() {
     // Nothing specific to clean up.
 }
 
-bool Visualizer::loadSolution() {
+bool Visualiser::loadSolution() {
     std::ifstream infile(filename);
     if (!infile.is_open()) {
         std::cerr << "Failed to open file: " << filename << std::endl;
@@ -57,7 +57,7 @@ bool Visualizer::loadSolution() {
     return true;
 }
 
-void Visualizer::showFinalTimeStep() {
+void Visualiser::showFinalTimeStep() {
     if (nt <= 0) return;
 
     // Get the final time step data.
@@ -95,7 +95,7 @@ void Visualizer::showFinalTimeStep() {
     std::cin.get();
 }
 
-void Visualizer::saveFinalTimeStep(const std::string &outputPath) {
+void Visualiser::saveFinalTimeStep(const std::string &outputPath) {
     if (nt <= 0) return;
 
     // Get the final time step data.
@@ -138,7 +138,7 @@ void Visualizer::saveFinalTimeStep(const std::string &outputPath) {
 
 
 
-void Visualizer::showAnimation(double xMin, double xMax, double yMin, double yMax, double pauseDuration) {
+void Visualiser::showAnimation(double xMin, double xMax, double yMin, double yMax, double pauseDuration) {
     if (nt <= 0) return;
 
     // Calculate grid spacing based on the domain.

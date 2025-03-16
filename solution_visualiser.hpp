@@ -4,11 +4,11 @@
 #include <string>
 #include <vector>
 
-class Visualizer {
+class Visualiser {
 public:
     // Constructor: filename of the solution file and grid dimensions.
-    Visualizer(const std::string &filename, int nx, int ny, int nt);
-    ~Visualizer();
+    Visualiser(const std::string &filename, int nx, int ny, int nt);
+    ~Visualiser();
 
     // Load the solution from file into the internal 3D vector.
     bool loadSolution();

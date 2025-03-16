@@ -17,7 +17,7 @@ public:
     WaveSolver2D(double c, double dx, double dy, double dt, int nx, int ny, int nt);
 
     // Initialize the solution grid with a Gaussian pulse
-    void initializeSolution();
+    void initialiseSolution();
 
     // Solve the 2D wave equation using a finite-difference scheme
     void solve();
