@@ -11,7 +11,7 @@
 
 int main() {
     // Simulation parameters.
-    const double c = 3.0;
+    const double c = 4.0;
     const double dx = 0.1;
     const double dy = 0.1;
     const double dt = 0.01;
@@ -39,7 +39,7 @@ int main() {
     // Animate the solution.
     // Assuming you want the domain to be from 0 to 10 in both x and y,
     // and a pause of 0.05 seconds between frames.
-    // viz.showAnimation(0.0, 10.0, 0.0, 10.0, 0.01);
+    //viz.showAnimation(0.0, 10.0, 0.0, 10.0, 0.01);
 
     return 0;
 }
