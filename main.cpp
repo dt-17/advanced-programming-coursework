@@ -5,12 +5,13 @@
 //  Created by Daniel Tompkins on 20/01/2025.
 //
 
-#include <iostream>
-#include "wave_solver.hpp"  // solver class
-#include "solution_visualiser.hpp" // visualisation class
+#include <iostream> // include iostream to allow inputs and outputs
+#include "wave_solver.hpp"  // include solver class
+#include "solution_visualiser.hpp" // include visualisation class
 
+// set up main function
 int main() {
-    // Simulation parameters:
+    // simulation parameters saved as double precision floats:
     // wave speed in km/s
     const double c = 4.0;
     // grid spacing in km (so spacing is 100m)
@@ -18,37 +19,43 @@ int main() {
     const double dy = 0.1;
     // timestep in s
     const double dt = 0.01;
+    //simulation parameters saved as integers
     // number of grid points - just a number, no unit attached
     const int nx = 100;
     const int ny = 100;
     // number of timesteps to run simulation for
     const int nt = 500;
 
-    // Create and run the solver.
+    // create an instance of the solver class
     WaveSolver2D solver(c, dx, dy, dt, nx, ny, nt);
     // call function to initialise solution
     solver.initialiseSolution();
     // call function to solve for given parameters
     solver.solve();
     // call function to save the full solution data - must pass a path to the name/location you wish to save it is
-    solver.saveSolution("/Users/danieltompkins/Documents/programming-coursework/solution1.txt");
+    solver.saveSolution("/Users/danieltompkins/Documents/programming-coursework/solution.txt");
     // confirmation that the solution has been saved
     std::cout << "Solution saved to solution.txt" << std::endl;
 
-    // Create a Visualizer instance.
-    Visualiser vis("/Users/danieltompkins/Documents/programming-coursework/solution1.txt", nx, ny, nt);
+    // create an instance of the visualiser class, loading the solution data that has just been saved
+    // you must pass the same filepath where you saved the solution along with the variables nx, ny and nt from above
+    Visualiser vis("/Users/danieltompkins/Documents/programming-coursework/solution.txt", nx, ny, nt);
     if (!vis.loadSolution()) {
-        std::cerr << "Error loading solution file." << std::endl;
+        std::cerr << "Error loading solution file." << std::endl; // return an error if data cannot be loaded
         return -1;
     }
     
-    // Save the output of the final time step solution
-    vis.saveFinalTimeStep("/Users/danieltompkins/Documents/programming-coursework/final_timestep1.png");
+    // display an interactive 3d plot of the solution at the final timestep, opens in a GNU Plot window
+    //vis.showFinalTimeStep();
     
-    // Animate the solution.
-    // Assuming you want the domain to be from 0 to 10 in both x and y,
-    // and a pause of 0.05 seconds between frames.
-    //viz.showAnimation(0.0, 10.0, 0.0, 10.0, 0.01);
+    // save a 3d plot of the solution at the final timestep in a location of your choice
+    vis.saveFinalTimeStep("/Users/danieltompkins/Documents/programming-coursework/final_timestep.png");
+    
+    // show an animation of the solution evolution in a GNU Plot window - no outfile path is required
+    // the first 4 arguments specify the domain size in x and y respectively (i.e. 0 to 10 in both)
+    // final argument specifies the pause between frames in seconds (higher means greater pause and less smooth animation)
+    // this can be used instead of the showFinalTimeStep() function, simply comment/uncomment the one you would like to see
+    //vis.showAnimation(0.0, 10.0, 0.0, 10.0, 0.01);
 
     return 0;
 }
