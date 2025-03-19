@@ -31,7 +31,7 @@ int main() {
     // call function to solve for given parameters
     solver.solve();
     // call function to save the full solution data - must pass a path to the name/location you wish to save it is
-    solver.saveSolution("/Users/danieltompkins/Documents/programming-coursework/solution1.txt");
+    solver.saveSolution("/Users/danieltompkins/Documents/programming-coursework/solution.txt");
     // confirmation that the solution has been saved
     std::cout << "Solution saved to solution.txt" << std::endl;
     
