@@ -1,5 +1,4 @@
 //
-//  main_no_plot.cpp
 //  advanced-programming
 //
 //  Created by Daniel Tompkins on 19/03/2025.
