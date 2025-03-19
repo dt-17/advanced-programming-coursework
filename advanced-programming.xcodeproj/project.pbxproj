@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E478EF662D8B1F450003BD12 /* main_no_plot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E478EF652D8B1F450003BD12 /* main_no_plot.cpp */; };
 		E4E4E9092D8240C600801DCB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4E4E9082D8240C600801DCB /* main.cpp */; };
 		E4E4E90C2D8240E700801DCB /* wave_solver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4E4E90B2D8240E700801DCB /* wave_solver.cpp */; };
 		E4E4E90F2D8240FB00801DCB /* solution_visualiser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4E4E90E2D8240FB00801DCB /* solution_visualiser.cpp */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		E45F18472D3EB21800C45170 /* advanced-programming */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "advanced-programming"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E478EF652D8B1F450003BD12 /* main_no_plot.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main_no_plot.cpp; sourceTree = "<group>"; };
 		E4E4E9082D8240C600801DCB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E4E4E90A2D8240DF00801DCB /* wave_solver.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = wave_solver.hpp; sourceTree = "<group>"; };
 		E4E4E90B2D8240E700801DCB /* wave_solver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = wave_solver.cpp; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 		E45F183E2D3EB21800C45170 = {
 			isa = PBXGroup;
 			children = (
+				E478EF652D8B1F450003BD12 /* main_no_plot.cpp */,
 				E4E4E9082D8240C600801DCB /* main.cpp */,
 				E4E4E90A2D8240DF00801DCB /* wave_solver.hpp */,
 				E4E4E90B2D8240E700801DCB /* wave_solver.cpp */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E478EF662D8B1F450003BD12 /* main_no_plot.cpp in Sources */,
 				E4E4E90F2D8240FB00801DCB /* solution_visualiser.cpp in Sources */,
 				E4E4E9092D8240C600801DCB /* main.cpp in Sources */,
 				E4E4E90C2D8240E700801DCB /* wave_solver.cpp in Sources */,
