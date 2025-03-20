@@ -97,10 +97,23 @@ void WaveSolver2D::solve() {
 // the data is written in a format with each time step's grid on a separate block
 void WaveSolver2D::saveSolution(const std::string& filename) const {
     std::ofstream outfile(filename);
-    if (!outfile) {
+    if (!outfile) { // this section verifies that the outfile has been successfully created/opened
         std::cerr << "Error opening file for writing: " << filename << std::endl;
         return;
     }
+    
+    // add simulation metadata to the top of the outfile
+    outfile << "# WaveSolver2D Simulation Output\n";
+    outfile << "# Date: " << __DATE__ << " " << __TIME__ << "\n";
+    outfile << "# Parameters: c = " << c
+            << ", dx = " << dx
+            << ", dy = " << dy
+            << ", dt = " << dt
+            << ", nx = " << nx
+            << ", ny = " << ny
+            << ", nt = " << nt << "\n";
+    outfile << "# Format: Each block corresponds to a time step; each row represents one spatial row.\n\n";
+    
     // loop over all time steps
     for (int n = 0; n < nt; ++n) {
         // loop over each row in the spatial domain
