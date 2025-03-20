@@ -40,6 +40,6 @@ int main() {
     // Save the solution to file.
     solver.saveSolution("/Users/danieltompkins/Documents/programming-coursework/solution.txt");
     std::cout << "Solution saved to solution.txt" << std::endl;
-
+    
     return 0;
 }

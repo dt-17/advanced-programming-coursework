@@ -37,7 +37,7 @@ public:
     //   xMin, xMax - domain limits for the x-axis
     //   yMin, yMax - domain limits for the y-axis
     //   pauseDuration - duration (in seconds) to pause between frames
-    void showAnimation(double xMin, double xMax, double yMin, double yMax, double pauseDuration);
+    void showAnimation(double xMin, double xMax, double yMin, double yMax, double pauseDuration, const std::string &videoOutputPath);
 
 private:
     std::string filename;  // file path for the solution data

@@ -11,6 +11,8 @@
 #include <sstream>                    // include sstream for string stream parsing
 #include <iostream>                   // include iostream for console I/O
 #include <string>                     // include string for string handling
+#include <cstdio>    // for snprintf and remove
+#include <cstdlib>   // for system
 
 // constructor for the Visualiser class
 // initialises the filename, grid dimensions and allocates memory for the 3D solution vector
@@ -167,46 +169,67 @@ void Visualiser::saveFinalTimeStep(const std::string &outputPath) {
 //   xMin, xMax - domain limits for the x-axis
 //   yMin, yMax - domain limits for the y-axis
 //   pauseDuration - pause between frames in seconds
-void Visualiser::showAnimation(double xMin, double xMax, double yMin, double yMax, double pauseDuration) {
+// Modified function: an extra parameter "videoOutputPath" lets you specify where to save the MP4.
+void Visualiser::showAnimation(double xMin, double xMax, double yMin, double yMax, double pauseDuration, const std::string &videoOutputPath) {
     if (nt <= 0) return;
 
-    // calculate grid spacing based on the provided domain
-    double dx = (xMax - xMin) / (nx - 1);
-    double dy = (yMax - yMin) / (ny - 1);
+    // Calculate grid spacing based on the provided domain.
+    double dx_grid = (xMax - xMin) / (nx - 1);
+    double dy_grid = (yMax - yMin) / (ny - 1);
 
-    // create a GNU Plot object
+    // Create a Gnuplot instance.
     Gnuplot gp;
     
-    // set up the basic plot properties for the animation
-    gp << "set title '2D Wave Equation Solution Animation'\n";
+    // Set common plot properties.
     gp << "set xlabel 'x'\n";
     gp << "set ylabel 'y'\n";
     gp << "set zlabel 'Amplitude'\n";
     gp << "set hidden3d\n";
 
-    // loop over each time step to generate the animation frames
+    // Loop over each time step and save each frame as a PNG file.
+    char frameFilename[100];
     for (int t = 0; t < nt; t++) {
+        // Create a file name like "frame_0000.png", "frame_0001.png", etc.
+        snprintf(frameFilename, sizeof(frameFilename), "frame_%04d.png", t);
+        std::string frameFile(frameFilename);
+        
+        // Set terminal and output file for this frame.
+        gp << "set terminal pngcairo size 800,600 enhanced font 'Verdana,10'\n";
+        gp << "set output '" << frameFile << "'\n";
+        gp << "set title '2D Wave Equation Solution Animation (t = " << t << ")'\n";
+        
+        // Plot the current time step.
         gp << "splot '-' using 1:2:3 with pm3d notitle\n";
-
-        // for each grid point, output its x, y, and z (amplitude) values
         for (int i = 0; i < nx; i++) {
-            double x = xMin + i * dx;
+            double x = xMin + i * dx_grid;
             for (int j = 0; j < ny; j++) {
-                double y = yMin + j * dy;
+                double y = yMin + j * dy_grid;
                 double z = u[t][i][j];
                 gp << x << " " << y << " " << z << "\n";
             }
-            gp << "\n";  // separate rows with a blank line
+            gp << "\n";  // Separate rows.
         }
         gp << "e\n" << std::flush;
-
-        // pause between frames to control the animation speed
-        gp << "pause " << pauseDuration << "\n";
     }
+
+    // Determine the frame rate (assumes pauseDuration is in seconds).
+    int frameRate = static_cast<int>(1.0 / pauseDuration);
     
-    // final pause to allow user interaction before closing the animation window
-    gp << "pause mouse\n";
+    // Build the ffmpeg command to combine frames into an MP4 video.
+    std::stringstream ffmpegCmd;
+    ffmpegCmd << "ffmpeg -y -framerate " << frameRate
+              << " -i frame_%04d.png -c:v libx264 -pix_fmt yuv420p " << videoOutputPath;
+    int ret = system(ffmpegCmd.str().c_str());
+    if (ret != 0) {
+        std::cerr << "ffmpeg command failed with return code: " << ret << std::endl;
+    } else {
+        std::cout << "Animation saved to " << videoOutputPath << std::endl;
+    }
+
+    // Remove temporary frame images.
+    for (int t = 0; t < nt; t++) {
+        snprintf(frameFilename, sizeof(frameFilename), "frame_%04d.png", t);
+        std::remove(frameFilename);
+    }
 }
-
-
 
