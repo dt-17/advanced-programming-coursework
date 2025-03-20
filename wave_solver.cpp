@@ -6,7 +6,7 @@
 //
 
 #include "wave_solver.hpp"      // include header for the solver class
-#include <cmath>                // include cmath for mathematical functions (e.g. exp)
+#include <cmath>                // include cmath for mathematical functions 
 #include <fstream>              // include fstream for file I/O
 #include <iostream>             // include iostream for console I/O
 #include <cstdlib>              // include cstdlib for atof and atoi if needed
