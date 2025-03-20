@@ -38,6 +38,13 @@ bool Visualiser::loadSolution() {
     }
 
     std::string line;
+    
+    // read and discard first four lines (the metadata lines)
+    for (int k = 0; k < 4; ++k) {
+        std::getline(infile, line);
+    }
+
+    
     // loop over each time step
     for (int t = 0; t < nt; ++t) {
         // loop over each spatial row in the grid
